@@ -1,3 +1,5 @@
+## Purpose
+
 node-remote is a simple web server/webpage pair that can be used (especially on
 mobile phones) as a remote control for video playing applications (running under
 X11).
@@ -7,11 +9,15 @@ different video players can be supported. At the moment, the [android xbmc remot
 control](https://code.google.com/p/android-xbmcremote/) skin is used and the
 keys are designed for [omxplayer](https://github.com/huceke/omxplayer).
 
-![remote control skin](remote_portrait.png)
+## "Screenshot"
+
+![remote control
+skin](https://raw.github.com/peter-x/node-remote/master/remote_portrait.png)
 
 
-RUNNING THE SERVER
-Start the server with the command node remote-server.js. Note you have to run
+## Usage
+
+Start the server with the command `node remote-server.js`. Note you have to run
 this command from within the display that you want to be controlling, not a
 remote session.
 
