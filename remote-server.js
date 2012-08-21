@@ -1,39 +1,46 @@
-var	io = require('socket.io'),
-	xManager = require('./xEventManager.js'),
-	server = require('./simpleServer').createServer();
-	
+var url = require('url'),
+    http = require('http'),
+    path = require('path'),
+    fs = require('fs'),
+    xManager = require('./xEventManager.js');
+var log = require('util').puts;
+    
+server = http.createServer(function(request, response) {
+    log(request.url);
+    var parsedUrl = url.parse(request.url, true);
+    var target = parsedUrl.pathname.substr(1);
 
-sockets = io.listen(server).sockets,
+    if (target == 'keyPress' || target == 'keyRelease') {
+        this.emit(target, parsedUrl.query['keyCode']);
+        response.writeHead(200);
+        response.end();
+        return;
+    } else if (target == '' || target == 'remote-client.js' || target == 'remote_portrait.png') {
+        if (target == '') target = 'remote.html';
+        var filename = path.join(process.cwd(), target);
+        log(filename);
 
-server.listen(8000);
+        fs.readFile(filename, "binary", function(err, file){
+            response.writeHead(200);
+            response.write(file, "binary");
+            response.end();
+            return;
+        });
+    } else {
+        response.writeHead(404, {"Content-Type": "text/plain"});
+        response.write("404 Not Found\n");
+        response.end();
+        return;
+    }
+}).listen(8000);
 
 xManager.createXManager(function(manager) {
-	sockets.on('connection', function(socket) {
-		socket.on('move', function(data) {
-        try{manager.move(data.xPercent, data.yPercent);}
-        catch(err){}
-		});	
-		socket.on('moveRelative', function(data) {
-        try{manager.moveRelative(data.x, data.y);}
-        catch(err){}
-		});
-		socket.on('keyUp', function(data){
-        try{manager.keyUp(data.key);}
-        catch(err){}
-		});
-		socket.on('keyDown', function(data){
-        try{manager.keyDown(data.key);}
-        catch(err){}
-		});
-		socket.on('keyPress', function(data){
-        try{manager.keyPress(data.key);}
-        catch(err){}
-		});
-		socket.on('click', function(data){
-        try{manager.click(data.clickCode);}
-        catch(err){}
-		});
-	});
-
+    server.on('keyPress', function(keyCode) {
+        try { manager.keyPress(keyCode); }
+        catch (err) { }
+    });
+    server.on('keyRelease', function(keyCode) {
+        try { manager.keyRelease(keyCode); }
+        catch (err) { }
+    });
 });
-

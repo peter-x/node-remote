@@ -16,43 +16,17 @@ function XManager(XDisplayClient){
 			self.keyMapper = mapper;	
 		});
 	});
-	
-	X.GetGeometry(self.root, function(result){
-		self.width = result.width;
-		self.height = result.height;
-	});
 }
 
-XManager.prototype.move= function(xPercent, yPercent){
-	x = Math.round(self.width *(xPercent/100));
-	y = Math.round(self.height * (yPercent/100));
-	this.X.WarpPointer(0,this.root,0,0,0,0,x,y);	
-}
-
-XManager.prototype.moveRelative= function(x, y){
-	this.X.QueryPointer(this.root, function(res){
-		newX = res.x + x;
-		newY = res.y + y;
-		this.X.WarpPointer(0,this.root,0,0,0,0,x,y);
-	});
-}
-
-XManager.prototype.keyUp = function (keyCode){
+XManager.prototype.keyRelease = function (keyCode){
 	X.require('xtest', function(test) {
 			test.FakeInput(test.KeyRelease, self.keyMapper.mapKey(keyCode), 0, root, 0, 0);
 	});
 }
 
-XManager.prototype.keyDown = function (keyCode){
+XManager.prototype.keyPress = function (keyCode){
 	X.require('xtest', function(test) {
 			test.FakeInput(test.KeyPress, self.keyMapper.mapKey(keyCode), 0, root, 0,0);
-	});
-}
-
-XManager.prototype.click = function (clickCode){
-	X.require('xtest', function(test){
-		test.FakeInput(test.ButtonPress, clickCode, 0, root, 0,0);
-		test.FakeInput(test.ButtonRelease, clickCode, 0, root, 0,0);
 	});
 }
 

@@ -1,13 +1,35 @@
 <html>
-	<head>
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
-		<script src="jqtouch.js"></script>
-		<script src="/socket.io/socket.io.js"></script>
-		<script src="remote-client.js"></script>
-	</head>
-	<body>
-		<div>
-			Move your mouse around to control the other computer
-		</div>
-	</body>
+<head>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+<script src="remote-client.js"></script>
+</head>
+<body>
+
+<img src="remote_portrait.png" width="480" height="854" border="0" usemap="#map" />
+
+<map name="map">
+<area shape="circle" coords="189,153,26" href="javascript:button(&apos;music&apos;);" />
+<area shape="circle" coords="86,149,26" href="javascript:button(&apos;video&apos;);" />
+<area shape="circle" coords="295,148,26" href="javascript:button(&apos;images&apos;);" />
+<area shape="circle" coords="400,149,26" href="javascript:button(&apos;tv&apos;);" />
+<area shape="poly" coords="167,233,169,319,69,319,40,303,32,279,35,252,51,238,63,231" href="javascript:button(&apos;rewind&apos;)" />
+<area shape="rect" coords="175,230,304,318" href="javascript:button(&apos;play&apos;)" />
+<area shape="poly" coords="313,232,418,232,441,243,453,264,453,284,445,304,431,314,417,318,312,317" href="javascript:button(&apos;fast-forward&apos;)" />
+<area shape="poly" coords="136,340,137,428,66,425,48,414,34,397,31,381,39,357,61,339" href="javascript:button(&apos;prev&apos;)" />
+<area shape="rect" coords="146,339,235,426" href="javascript:button(&apos;stop&apos;)" />
+<area shape="rect" coords="243,338,335,427" href="javascript:button(&apos;pause&apos;)" />
+<area shape="poly" coords="339,339,414,339,431,345,450,365,454,384,443,407,433,420,412,429,339,426" href="javascript:button(&apos;next&apos;)" />
+<area shape="poly" coords="253,33,283,37,298,48,298,59,279,69,252,74,223,72,192,64,181,57,181,42,213,32" href="javascript:button(&apos;top&apos;)" />
+<area shape="circle" coords="99,528,29" href="javascript:button(&apos;title&apos;)" />
+<area shape="circle" coords="98,766,29" href="javascript:button(&apos;menu&apos;)" />
+<area shape="circle" coords="387,765,29" href="javascript:button(&apos;back&apos;)" />
+<area shape="circle" coords="387,529,29" href="javascript:button(&apos;info&apos;)" />
+<area shape="poly" coords="229,622,256,622,283,628,297,639,299,656,277,665,254,671,225,671,205,665,186,657,181,641,195,630,216,624" href="javascript:button(&apos;select&apos;)" />
+<area shape="poly" coords="166,562,245,494,323,562" href="javascript:button(&apos;up&apos;)" />
+<area shape="poly" coords="348,583,425,648,348,711" href="javascript:button(&apos;right&apos;)" />
+<area shape="poly" coords="165,732,322,732,242,801" href="javascript:button(&apos;down&apos;)" />
+<area shape="poly" coords="134,583,133,706,60,646" href="javascript:button(&apos;left&apos;)" />
+</map>
+
+</body>
 </html>
